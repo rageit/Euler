@@ -5,6 +5,8 @@ namespace EulerSolutions.Problems
 {
     public class Problem15 : IProblemSolver
     {
+        private static long _pathCount;
+
         public string Title
         {
             get { return "Lattice paths"; }
@@ -30,15 +32,34 @@ namespace EulerSolutions.Problems
         ///                  2,2
         public string Solve()
         {
-            const int maxDim = 2;
-            var baseNode = ConstructGraph(maxDim, maxDim);
+            const int maxDim = 20;
+            _pathCount = 0;
 
-            return CountPaths(baseNode, maxDim, maxDim).ToString(CultureInfo.InvariantCulture);
+            //var baseNode = ConstructGraph(maxDim, maxDim);
+            var baseNode = new Node(0, 0);
+
+            Traverse(baseNode, maxDim, maxDim);
+
+            return _pathCount.ToString(CultureInfo.InvariantCulture);
         }
 
-        private int CountPaths(Node baseNode, int xDim, int yDim)
+        private void Traverse(Node node, int xDim, int yDim)
         {
-            return 0;
+            // Reached the goal node
+            if (node.X == xDim - 1 && node.Y == yDim - 1)
+            {
+                _pathCount++;
+                return;
+            }
+
+            if (node.X < xDim - 1)
+            {
+                Traverse(new Node(node.X + 1, node.Y), xDim, yDim);
+            }
+            if (node.Y < yDim - 1)
+            {
+                Traverse(new Node(node.X, node.Y + 1), xDim, yDim);
+            }
         }
 
         private Node ConstructGraph(int xDim, int yDim)
@@ -51,7 +72,7 @@ namespace EulerSolutions.Problems
 
         private void AddNode(Node currentNode, int xDim, int yDim)
         {
-            if (currentNode.X < xDim)
+            if (currentNode.X < xDim - 1)
             {
                 var leftChildNode = new Node(currentNode.X + 1, currentNode.Y);
                 currentNode.LeftNode = leftChildNode;
@@ -59,7 +80,7 @@ namespace EulerSolutions.Problems
                 AddNode(currentNode.LeftNode, xDim, yDim);
             }
 
-            if (currentNode.Y < yDim)
+            if (currentNode.Y < yDim - 1)
             {
                 var rightChildNode = new Node(currentNode.X, currentNode.Y + 1);
                 currentNode.RightNode = rightChildNode;

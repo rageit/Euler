@@ -42,7 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionRunner.cs" />
     <Compile Include="Common\IProblemSolver.cs" />
+    <Compile Include="IActionRunner.cs" />
+    <Compile Include="ProblemStore.cs" />
     <Compile Include="Problems\Problem15.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
