@@ -1,2 +1,3 @@
 *.suo
-EulerSolutions/bin/Debug/EulerSolutions.exe.config
+EulerSolutions/bin
+EulerSolutions/obj
