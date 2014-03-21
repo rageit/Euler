@@ -1,4 +1,13 @@
+<<<<<<< HEAD
 *.suo
 EulerSolutions/bin
 EulerSolutions/obj
 /EulerSolutions.Tests/obj/Debug
+=======
+*.suo
+EulerSolutions/bin
+EulerSolutions/obj
+*.cache
+EulerSolutions.Tests/bin
+EulerSolutions.Tests/obj
+>>>>>>> origin/Problem17
