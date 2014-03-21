@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace EulerSolutions.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class NumberToWordsTests
     {
         [TestMethod]
         public void OnesTests()
