@@ -3,8 +3,9 @@ using EulerSolutions.Common;
 
 namespace EulerSolutions.Problems
 {
-    public class Problem15 : IProblemSolver
+    public class Problem15 : IProblemSolver<string>
     {
+        private static readonly object Lock = new object();
         private static long _pathCount;
 
         public string Title
@@ -32,76 +33,58 @@ namespace EulerSolutions.Problems
         ///                  2,2
         public string Solve()
         {
-            const int maxDim = 20;
+            const int maxDim = 21;
             _pathCount = 0;
 
-            //var baseNode = ConstructGraph(maxDim, maxDim);
-            var baseNode = new Node(0, 0);
+            //// Constructing graph and then traversing it consumes a lot of memory
+            //var baseNode = new BinaryNode<string>(0, 0);
 
-            Traverse(baseNode, maxDim, maxDim);
+            //// Using graph traversal
+            //Traverse(baseNode, maxDim, maxDim);
+
+            _pathCount = FindPaths(20, 20);
 
             return _pathCount.ToString(CultureInfo.InvariantCulture);
         }
 
-        private void Traverse(Node node, int xDim, int yDim)
+        private void Traverse(IBinaryNode<string> node, int xDim, int yDim)
         {
             // Reached the goal node
             if (node.X == xDim - 1 && node.Y == yDim - 1)
             {
-                _pathCount++;
+                lock (Lock)
+                {
+                    _pathCount++;
+                }
                 return;
             }
 
             if (node.X < xDim - 1)
             {
-                Traverse(new Node(node.X + 1, node.Y), xDim, yDim);
+                Traverse(new BinaryNode<string>(node.X + 1, node.Y), xDim, yDim);
             }
             if (node.Y < yDim - 1)
             {
-                Traverse(new Node(node.X, node.Y + 1), xDim, yDim);
+                Traverse(new BinaryNode<string>(node.X, node.Y + 1), xDim, yDim);
             }
         }
 
-        private Node ConstructGraph(int xDim, int yDim)
+        public long FindPaths(int rows, int columns)
         {
-            var baseNode = new Node(0, 0);
-            AddNode(baseNode, xDim, yDim);
+            var paths = new long[rows + 1, columns + 1];
 
-            return baseNode;
-        }
-
-        private void AddNode(Node currentNode, int xDim, int yDim)
-        {
-            if (currentNode.X < xDim - 1)
+            for (int row = 0; row <= rows; row++)
             {
-                var leftChildNode = new Node(currentNode.X + 1, currentNode.Y);
-                currentNode.LeftNode = leftChildNode;
-
-                AddNode(currentNode.LeftNode, xDim, yDim);
+                for (int column = 0; column <= columns; column++)
+                {
+                    if (row == 0 || column == 0)
+                        paths[row, column] = 1;
+                    else
+                        paths[row, column] = paths[row - 1, column] + paths[row, column - 1];
+                }
             }
 
-            if (currentNode.Y < yDim - 1)
-            {
-                var rightChildNode = new Node(currentNode.X, currentNode.Y + 1);
-                currentNode.RightNode = rightChildNode;
-
-                AddNode(currentNode.RightNode, xDim, yDim);
-            }
-        }
-
-        class Node
-        {
-            public int X { get; set; }
-            public int Y { get; set; }
-
-            public Node LeftNode { get; set; }
-            public Node RightNode { get; set; }
-
-            public Node(int x, int y)
-            {
-                X = x;
-                Y = y;
-            }
+            return paths[rows, columns];
         }
     }
 }

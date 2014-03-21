@@ -1,23 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EulerSolutions.Common;
+using EulerSolutions.Problems;
 
 namespace EulerSolutions
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
-            var problemSolver = ProblemStore.Instance.GetProblemSolver(15);
+            const int problemId = 15;
+            var result = Execute(problemId);
 
-            var result = problemSolver.Solve();
-
-            Console.WriteLine(problemSolver.Title);
-            Console.WriteLine(string.Format("Result: {0}", result));
+            PublishResult(result);
 
             Console.ReadLine();
         }
+
+        private static Result Execute(int problemId)
+        {
+            var problemSolver = ProblemStore.Instance.Get<IProblemSolver<string>>(problemId);
+
+            IActionRunner runner = new ActionRunner();
+            var answer = runner.Invoke<string>(problemSolver.Solve);
+
+            return new Result(problemSolver.Title, answer, runner.TimeElapsed);
+        }
+
+        private static void PublishResult(Result result)
+        {
+            Console.WriteLine(result.Title);
+            Console.WriteLine("Answer: {0}", result.Answer);
+            Console.WriteLine("Time Taken: {0}",
+                string.Format("{0:D2}h:{1:D2}m:{2:D2}s:{3:D3}ms",
+                    result.TimeElapsed.Hours,
+                    result.TimeElapsed.Minutes,
+                    result.TimeElapsed.Seconds,
+                    result.TimeElapsed.Milliseconds));
+        }
+
+        private struct Result
+        {
+            public readonly string Title;
+            public readonly string Answer;
+            public readonly TimeSpan TimeElapsed;
+
+            public Result(string title, string answer, TimeSpan timeElapsed)
+            {
+                Title = title;
+                Answer = answer;
+                TimeElapsed = timeElapsed;
+            }
+        }
     }
 }
+

@@ -1,6 +1,6 @@
 ﻿namespace EulerSolutions.Common
 {
-    public interface IProblemSolver
+    public interface IProblemSolver<out TResult>
     {
         /// <summary>
         /// Represents the title of the problem
@@ -12,6 +12,10 @@
         /// </summary>
         string Definition { get; }
 
-        string Solve();
+        /// <summary>
+        /// Method that is responsible for solving the problem
+        /// </summary>
+        /// <returns>Returns the result value</returns>
+        TResult Solve();
     }
 }
