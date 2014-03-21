@@ -37,12 +37,12 @@ namespace EulerSolutions.Problems
             _pathCount = 0;
 
             //// Constructing graph and then traversing it consumes a lot of memory
-            //var baseNode = new BinaryNode<string>(0, 0);
+            var baseNode = new BinaryNode<string>(0, 0);
 
             //// Using graph traversal
-            //Traverse(baseNode, maxDim, maxDim);
+            Traverse(baseNode, maxDim, maxDim);
 
-            _pathCount = FindPaths(20, 20);
+            //_pathCount = FindPaths(20, 20);
 
             return _pathCount.ToString(CultureInfo.InvariantCulture);
         }

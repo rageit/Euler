@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Linq;
 using EulerSolutions.Common;
 
 namespace EulerSolutions.Problems
@@ -29,7 +31,18 @@ namespace EulerSolutions.Problems
 
         public string Solve()
         {
-            throw new System.NotImplementedException();
+            var letterCount = 0;
+            var numberToWord = new NumberToWords();
+
+            for (int i = 1; i <= 1000; i++)
+            {
+                var words = numberToWord.GetWordsForNumber(i);
+                words = words.Replace(" ", "");
+
+                letterCount += words.Length;
+            }
+
+            return letterCount.ToString(CultureInfo.InvariantCulture);
         }
     }
 }
