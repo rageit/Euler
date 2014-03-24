@@ -8,7 +8,13 @@ namespace EulerSolutions
     {
         public static void Main()
         {
-            const int problemId = 17;
+            int problemId;
+
+            do
+            {
+                Console.WriteLine("Please enter a number for the problem:");
+            } while (!int.TryParse(Console.ReadLine(), out problemId));
+
             var result = Execute(problemId);
 
             PublishResult(result);
