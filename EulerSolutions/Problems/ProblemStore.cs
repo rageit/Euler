@@ -20,6 +20,7 @@ namespace EulerSolutions.Problems
         {
             Add(15, new Problem15());
             Add(17, new Problem17());
+            Add(18, new Problem18());
         }
 
         private void Add(int problemNumber, object problemSolver)
