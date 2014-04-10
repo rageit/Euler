@@ -1,20 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using EulerSolutions.Common;
 
 namespace EulerSolutions.Problems
 {
     public class ProblemStore
     {
         // Just working with strings at the moment
-        private readonly Dictionary<int, object> _store = new Dictionary<int, object>();
 
         private static readonly Lazy<ProblemStore> Lazy = new Lazy<ProblemStore>(() => new ProblemStore());
-
-        public static ProblemStore Instance
-        {
-            get { return Lazy.Value; }
-        }
+        private readonly Dictionary<int, object> _store = new Dictionary<int, object>();
 
         private ProblemStore()
         {
@@ -23,6 +17,11 @@ namespace EulerSolutions.Problems
             Add(18, new Problem18());
             Add(19, new Problem19());
             Add(21, new Problem21());
+        }
+
+        public static ProblemStore Instance
+        {
+            get { return Lazy.Value; }
         }
 
         private void Add(int problemNumber, object problemSolver)

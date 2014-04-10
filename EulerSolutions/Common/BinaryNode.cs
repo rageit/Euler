@@ -2,14 +2,6 @@
 {
     public class BinaryNode<TValue> : IBinaryNode<TValue>
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-
-        public IBinaryNode<TValue> LeftNode { get; set; }
-        public IBinaryNode<TValue> RightNode { get; set; }
-
-        public TValue Value { get; set; }
-
         public BinaryNode(int x, int y)
         {
             X = x;
@@ -20,5 +12,13 @@
         {
             Value = value;
         }
+
+        public int X { get; set; }
+        public int Y { get; set; }
+
+        public IBinaryNode<TValue> LeftNode { get; set; }
+        public IBinaryNode<TValue> RightNode { get; set; }
+
+        public TValue Value { get; set; }
     }
 }

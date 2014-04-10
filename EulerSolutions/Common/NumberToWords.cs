@@ -5,6 +5,8 @@ namespace EulerSolutions.Common
 {
     public class NumberToWords
     {
+        private const string And = "and";
+
         private static readonly Dictionary<int, string> NumberToWordMap = new Dictionary<int, string>
         {
             {0, "zero"},
@@ -39,16 +41,14 @@ namespace EulerSolutions.Common
             {1000, "thousand"}
         };
 
-        private const string And = "and";
-
         public string GetWordsForNumber(int number)
         {
-            var thousands = (number/1000);
-            var hundreds = (number - thousands*1000)/100;
-            var tens = (number - thousands*1000 - hundreds*100)/10;
-            var ones = (number - thousands*1000 - hundreds*100 - tens*10);
+            int thousands = (number/1000);
+            int hundreds = (number - thousands*1000)/100;
+            int tens = (number - thousands*1000 - hundreds*100)/10;
+            int ones = (number - thousands*1000 - hundreds*100 - tens*10);
 
-            var andFlag = false;
+            bool andFlag = false;
 
             var numberToWord = new StringBuilder();
             if (thousands > 0)
@@ -60,14 +60,14 @@ namespace EulerSolutions.Common
             }
             if (hundreds > 0)
             {
-                var formatString = thousands > 0 ? " {0} {1}" : "{0} {1}";
+                string formatString = thousands > 0 ? " {0} {1}" : "{0} {1}";
                 numberToWord.Append(string.Format(formatString, NumberToWordMap[hundreds], NumberToWordMap[100]));
 
                 if (tens > 0 || ones > 0)
                     andFlag = true;
             }
 
-            var conjunction = andFlag ? " and " : " ";
+            string conjunction = andFlag ? " and " : " ";
             if (tens > 1)
             {
                 numberToWord.Append(conjunction + NumberToWordMap[tens*10]);

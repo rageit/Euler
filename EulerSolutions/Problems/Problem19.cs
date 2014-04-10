@@ -11,18 +11,21 @@ namespace EulerSolutions.Problems
             get { return "Problem 19: Counting Sundays"; }
         }
 
-        public string Definition { get { return "http://projecteuler.net/problem=19"; } }
+        public string Definition
+        {
+            get { return "http://projecteuler.net/problem=19"; }
+        }
 
         /// <summary>
-        /// How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
+        ///     How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
         /// </summary>
         /// <returns>Answer</returns>
         public string Solve()
         {
-            var startDate = DateTime.Parse("1/1/1901");
-            var endDate = DateTime.Parse("12/31/2000");
+            DateTime startDate = DateTime.Parse("1/1/1901");
+            DateTime endDate = DateTime.Parse("12/31/2000");
 
-            var sundayMorningCounter = 0;
+            int sundayMorningCounter = 0;
 
             while (startDate <= endDate)
             {

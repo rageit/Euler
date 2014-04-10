@@ -7,7 +7,7 @@ namespace EulerSolutions.Common
         public int[] GetDivisors(int number)
         {
             var divisors = new List<int>();
-            for (var i = 1; i < number; i++)
+            for (int i = 1; i < number; i++)
             {
                 if (number%i == 0)
                     divisors.Add(i);

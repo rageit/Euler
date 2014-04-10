@@ -7,7 +7,7 @@ namespace EulerSolutions.Problems
     public class Problem18 : IProblemSolver<string>
     {
         // jagged array
-        private int[][] bermudaTriangle =
+        private readonly int[][] bermudaTriangle =
         {
             new[] {75},
             new[] {95, 64},
@@ -38,7 +38,7 @@ namespace EulerSolutions.Problems
 
         public string Solve()
         {
-            var depth = bermudaTriangle.GetLength(0) - 2;
+            int depth = bermudaTriangle.GetLength(0) - 2;
 
             // Start from the leaf nodes
             while (depth >= 0)
@@ -46,7 +46,8 @@ namespace EulerSolutions.Problems
                 for (int j = 0; j <= depth; j++)
                 {
                     // Adds larger of the two numbers
-                    bermudaTriangle[depth][j] += Math.Max(bermudaTriangle[depth + 1][j], bermudaTriangle[depth + 1][j + 1]);
+                    bermudaTriangle[depth][j] += Math.Max(bermudaTriangle[depth + 1][j],
+                        bermudaTriangle[depth + 1][j + 1]);
                 }
                 depth += -1;
             }

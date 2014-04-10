@@ -12,10 +12,10 @@ namespace EulerSolutions
 
             do
             {
-                Console.WriteLine("Please enter a number for the problem:");
+                Console.WriteLine("Enter Problem Number:");
             } while (!int.TryParse(Console.ReadLine(), out problemId));
 
-            var result = Execute(problemId);
+            Result result = Execute(problemId);
 
             PublishResult(result);
 
@@ -46,9 +46,9 @@ namespace EulerSolutions
 
         private struct Result
         {
-            public readonly string Title;
             public readonly string Answer;
             public readonly TimeSpan TimeElapsed;
+            public readonly string Title;
 
             public Result(string title, string answer, TimeSpan timeElapsed)
             {
@@ -59,4 +59,3 @@ namespace EulerSolutions
         }
     }
 }
-
