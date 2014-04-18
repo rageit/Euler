@@ -14,5 +14,13 @@ namespace EulerSolutions.Common
             }
             return divisors.ToArray();
         }
+
+        public long GetFactorial(int number)
+        {
+            if (number == 1)
+                return number;
+
+            return GetFactorial(number - 1)*number;
+        }
     }
 }

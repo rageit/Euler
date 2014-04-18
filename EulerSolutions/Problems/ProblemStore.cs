@@ -18,6 +18,8 @@ namespace EulerSolutions.Problems
             Add(19, new Problem19());
             Add(21, new Problem21());
             Add(22, new Problem22());
+            Add(23, new Problem23());
+            Add(24, new Problem24());
         }
 
         public static ProblemStore Instance

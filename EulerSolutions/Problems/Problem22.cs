@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using EulerSolutions.Common;
@@ -30,14 +29,14 @@ namespace EulerSolutions.Problems
 
         public string Solve()
         {
-            var sortedNameList = GetNames().OrderBy(n => n).ToArray();
+            string[] sortedNameList = GetNames().OrderBy(n => n).ToArray();
             long nameScoreTotal = 0;
 
             for (int i = 1; i <= sortedNameList.Count(); i++)
             {
-                var name = sortedNameList[i -1];
-                var nameScore = GetNameScore(name);
-                nameScoreTotal += nameScore * i;
+                string name = sortedNameList[i - 1];
+                int nameScore = GetNameScore(name);
+                nameScoreTotal += nameScore*i;
             }
 
             return nameScoreTotal.ToString(CultureInfo.InvariantCulture);
@@ -52,12 +51,12 @@ namespace EulerSolutions.Problems
         {
             const int positionA = (int) 'A';
 
-            return (int) alphabet - positionA + 1;
+            return alphabet - positionA + 1;
         }
 
         private IEnumerable<string> GetNames()
         {
-            var names = new string[]
+            var names = new[]
             {
                 "MARY", "PATRICIA", "LINDA", "BARBARA", "ELIZABETH", "JENNIFER", "MARIA", "SUSAN", "MARGARET", "DOROTHY",
                 "LISA", "NANCY", "KAREN", "BETTY", "HELEN", "SANDRA", "DONNA", "CAROL", "RUTH", "SHARON", "MICHELLE",
